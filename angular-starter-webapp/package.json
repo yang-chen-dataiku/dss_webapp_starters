@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve",
+    "dev": "node scripts/dev.mjs",
     "build": "ng build",
     "build-only": "ng build",
     "type-check": "tsc --noEmit -p tsconfig.app.json",
