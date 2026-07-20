@@ -10,7 +10,7 @@ from webaiku.extension import WEBAIKU
 
 app = Flask(__name__)
 WEBAIKU(
-    app, "webapps/angularapp", int(os.getenv("VITE_API_PORT"))
+    app, "webapps/reactapp", int(os.getenv("VITE_API_PORT"))
 )
 WEBAIKU.extend(app, [fetch_api])
 
