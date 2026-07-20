@@ -1,17 +1,16 @@
-from flask import Flask
-from .fetch_api import fetch_api
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
+from flask import Flask
+
+from .fetch_api import fetch_api
 
 load_dotenv()
 
 from webaiku.extension import WEBAIKU
 
-
 app = Flask(__name__)
-WEBAIKU(
-    app, "webapps/reactapp", int(os.getenv("VITE_API_PORT"))
-)
+WEBAIKU(app, "webapps/vueapp", int(os.getenv("VITE_API_PORT")))
 WEBAIKU.extend(app, [fetch_api])
 
 if __name__ == "__main__":
