@@ -1,30 +1,44 @@
-# Makefile for backend (Flask) in this reactapp directory using uv
+# Makefile for backend (Flask) in this vueapp directory using uv
 # Requires uv installed: https://docs.astral.sh/uv/
 
 UV ?= uv
 PYTHON_VERSION ?= 3.10
 VENV_DIR := .venv
+BACKEND_TYPES ?= flask fastapi
+BACKEND_TYPE ?= flask
 
-REQUIREMENTS := requirements.local.txt
+empty :=
+space := $(empty) $(empty)
+BACKEND_TYPES_DISPLAY := $(subst $(space),|,$(BACKEND_TYPES))
 
-.PHONY: help backend-build backend-venv backend-install backend-start backend-clean
+# Fail on an unsupported value
+ifeq ($(filter $(BACKEND_TYPE),$(BACKEND_TYPES)),)
+$(error BACKEND_TYPE must be one of: $(BACKEND_TYPES_DISPLAY) (got '$(BACKEND_TYPE)'))
+endif
+
+.PHONY: help backend-build backend-install backend-start backend-clean
 
 help:
 	@echo "Targets:"
-	@echo "  backend-build  - Create uv venv (py$(PYTHON_VERSION)) and install reqs"
-	@echo "  backend-start  - Start Flask backend (loads ./.env)"
+	@echo "  backend-build  - Sync project dependencies with uv (py$(PYTHON_VERSION))"
+	@echo "  backend-start  - Start Python backend (loads ./.env)"
 	@echo "  backend-clean  - Remove backend virtualenv"
+	@echo ""
+	@echo "Variables:"
+	@echo "  BACKEND_TYPE	- Backend framework: {$(shell echo '$(BACKEND_TYPES)' | tr ' ' '|')} (default: $(BACKEND_TYPE))"
+	@echo "  PYTHON_VERSION	- Python version passed to uv (default: $(PYTHON_VERSION))"
+	@echo ""
+	@echo "Example: make backend-start BACKEND_TYPE=fastapi"
 
-backend-build: backend-install
+# Sync project dependencies with uv
+backend-build:
+	$(UV) sync -p $(PYTHON_VERSION) --extra $(BACKEND_TYPE)
 
-backend-venv:
-	$(UV) venv --python $(PYTHON_VERSION)
-
-backend-install: backend-venv $(REQUIREMENTS)
-	$(UV) pip install -r requirements.local.txt
-
+# Start backend
 backend-start:
-	$(UV) run --env-file .env -m backend.wsgi
+	$(UV) run --env-file .env -m backend.$(BACKEND_TYPE).app
 
+# Remove the backend virtual environment
 backend-clean:
 	rm -rf $(VENV_DIR)
+

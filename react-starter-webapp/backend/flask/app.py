@@ -1,0 +1,17 @@
+import os
+
+from dotenv import load_dotenv
+from flask import Flask
+
+from .fetch_api import fetch_api
+
+load_dotenv()
+
+from webaiku.extension import WEBAIKU
+
+app = Flask(__name__)
+WEBAIKU(app, "webapps/vueapp", int(os.getenv("VITE_API_PORT")))
+WEBAIKU.extend(app, [fetch_api])
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=int(os.getenv("VITE_API_PORT")), debug=True)
