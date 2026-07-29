@@ -16,6 +16,8 @@ ifeq ($(filter $(BACKEND_TYPE),$(BACKEND_TYPES)),)
 $(error BACKEND_TYPE must be one of: $(BACKEND_TYPES_DISPLAY) (got '$(BACKEND_TYPE)'))
 endif
 
+UV_FLAGS := -p $(PYTHON_VERSION) --extra $(BACKEND_TYPE)
+
 .PHONY: help backend-build backend-install backend-start backend-clean
 
 help:
@@ -32,11 +34,11 @@ help:
 
 # Sync project dependencies with uv
 backend-build:
-	$(UV) sync -p $(PYTHON_VERSION) --extra $(BACKEND_TYPE)
+	$(UV) sync $(UV_FLAGS)
 
 # Start backend
 backend-start:
-	$(UV) run -m backend.$(BACKEND_TYPE).app
+	$(UV) run $(UV_FLAGS) -m backend.$(BACKEND_TYPE).app
 
 # Remove the backend virtual environment
 backend-clean:
