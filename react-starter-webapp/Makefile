@@ -36,7 +36,7 @@ backend-build:
 
 # Start backend
 backend-start:
-	$(UV) run --env-file .env -m backend.$(BACKEND_TYPE).app
+	$(UV) run -m backend.$(BACKEND_TYPE).app
 
 # Remove the backend virtual environment
 backend-clean:
