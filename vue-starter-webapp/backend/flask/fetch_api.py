@@ -12,7 +12,6 @@ def get_projects():
         projects = client.list_projects()
         return jsonify(projects)
     except Exception as e:
-        # Surface the error for quick debugging in dev
         return jsonify({"error": str(e)}), 500
 
 

@@ -1,0 +1,19 @@
+[project]
+name = "angular-starter-webapp"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "dataiku-api-client>=11.0.0",
+    "dataiku-internal-client",
+    "pandas>=0.23.0",
+    "python-dotenv==0.19.0",
+    "webaiku",
+]
+
+[project.optional-dependencies]
+fastapi = ["fastapi[standard]"]
+flask = ["flask>=0.9"]
+
+[tool.uv.sources]
+webaiku = { git = "https://github.com/dataiku/solutions-contrib.git", subdirectory = "bs-infra", rev = "main" }
+dataiku-internal-client = { url = "https://design.ds-platform.ondku.net/public/packages/dataiku-internal-client.tar.gz" }

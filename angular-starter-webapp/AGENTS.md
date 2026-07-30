@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to agent harnesses (e.g., Codex, Claude Code) when working with code in this repository.
 
 ## Project Overview
 
@@ -11,17 +11,29 @@ Unlike the Vue/React starters which use Vite, this project uses Angular CLI (`@a
 ## Commands
 
 ### Development
-```bash
-# Frontend (Terminal 1)
-pnpm install
-pnpm dev              # ng serve at http://localhost:4200
 
-# Backend (Terminal 2)
-make backend-install
-make backend-start    # Starts at http://localhost:5000
+#### Frontend
+
+```bash
+# Frontend (http://localhost:4200)
+pnpm install
+pnpm dev
+```
+
+#### Backend
+
+```bash
+# Flask backend (http://localhost:5000)
+make backend-start
+
+# FastAPI backend (http://localhost:5000)
+# Make sure the BACKEND_TYPE shell variable is exported if you start a new shell session
+export BACKEND_TYPE=fastapi
+make backend-start
 ```
 
 ### Build & Deploy
+
 ```bash
 pnpm build            # ng build → dist/ with outputHashing:none
 pnpm type-check       # TypeScript check only
@@ -31,6 +43,7 @@ pnpm format           # Prettier formatting
 ## Architecture
 
 ### Frontend (`src/`)
+
 - **Bootstrap** (`src/main.ts`): `bootstrapApplication(AppComponent, appConfig)`
 - **App config** (`src/app/app.config.ts`): Provides router, HttpClient, and `APP_BASE_HREF` (Dataiku base path detection via `getBase()`)
 - **Routes** (`src/app/app.routes.ts`): Eager-loaded routes; `/fetch/**` redirects to `/`
@@ -40,18 +53,21 @@ pnpm format           # Prettier formatting
 - **Views** (`src/app/views/`): Standalone components using Angular 17+ signals (`signal`, `computed`) and `toSignal()` to convert RxJS observables.
 - **Utils** (`src/app/lib/utils.ts`): `cn()`, `inIframe()`, `getBase()`
 
-### Backend (`backend/`)
-- **Flask app** (`wsgi.py`): Entry point, initializes WEBAIKU extension
+### Backend (`backend/[flask | fastapi]`)
+
+- **Flask/FastAPI app** (`app.py`): Entry point, initializes WEBAIKU extension
 - **API routes** (`fetch_api.py`): Blueprint at `/api/*`
 
 ### Key Integration Points
-- `ng serve` proxies `/api/*` to Flask via `proxy.conf.json`
+
+- `ng serve` proxies `/api/*` to the backend via `proxy.conf.json`
 - `APP_BASE_HREF` is set to `getBase()` at runtime — handles Dataiku's nested URL structure
 - `outputHashing: "none"` in `angular.json` gives deterministic asset filenames
 
 ## Environment Variables
 
 Copy `.env.example` to `.env` and configure:
+
 - `DKU_API_KEY`: Your Dataiku API key
 - `DKU_DSS_URL`: Dataiku instance URL
 - `VITE_API_PORT`: Backend port (5000 by default) — also used by `make backend-start`
