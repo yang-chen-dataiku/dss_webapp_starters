@@ -11,6 +11,7 @@ Unlike the Vue/React starters which use Vite, this project uses Angular CLI (`@a
 ## Commands
 
 ### Development
+
 ```bash
 # Frontend (Terminal 1)
 pnpm install
@@ -22,6 +23,7 @@ make backend-start    # Starts at http://localhost:5000
 ```
 
 ### Build & Deploy
+
 ```bash
 pnpm build            # ng build → dist/ with outputHashing:none
 pnpm type-check       # TypeScript check only
@@ -31,6 +33,7 @@ pnpm format           # Prettier formatting
 ## Architecture
 
 ### Frontend (`src/`)
+
 - **Bootstrap** (`src/main.ts`): `bootstrapApplication(AppComponent, appConfig)`
 - **App config** (`src/app/app.config.ts`): Provides router, HttpClient, and `APP_BASE_HREF` (Dataiku base path detection via `getBase()`)
 - **Routes** (`src/app/app.routes.ts`): Eager-loaded routes; `/fetch/**` redirects to `/`
@@ -40,18 +43,21 @@ pnpm format           # Prettier formatting
 - **Views** (`src/app/views/`): Standalone components using Angular 17+ signals (`signal`, `computed`) and `toSignal()` to convert RxJS observables.
 - **Utils** (`src/app/lib/utils.ts`): `cn()`, `inIframe()`, `getBase()`
 
-### Backend (`backend/`)
-- **Flask app** (`wsgi.py`): Entry point, initializes WEBAIKU extension
+### Backend (`backend/[flask | fastapi]`)
+
+- **Flask/FastAPI app** (`app.py`): Entry point, initializes WEBAIKU extension
 - **API routes** (`fetch_api.py`): Blueprint at `/api/*`
 
 ### Key Integration Points
-- `ng serve` proxies `/api/*` to Flask via `proxy.conf.json`
+
+- `ng serve` proxies `/api/*` to the backend via `proxy.conf.json`
 - `APP_BASE_HREF` is set to `getBase()` at runtime — handles Dataiku's nested URL structure
 - `outputHashing: "none"` in `angular.json` gives deterministic asset filenames
 
 ## Environment Variables
 
 Copy `.env.example` to `.env` and configure:
+
 - `DKU_API_KEY`: Your Dataiku API key
 - `DKU_DSS_URL`: Dataiku instance URL
 - `VITE_API_PORT`: Backend port (5000 by default) — also used by `make backend-start`
