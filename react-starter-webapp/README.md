@@ -1,6 +1,6 @@
-# Angular Webapp Starter for Dataiku
+# React Webapp Starter for Dataiku
 
-A starter template for building modern webapps that deploy to Dataiku. Uses Angular + Vite for the frontend and Python (FastAPI/Flask) backend.
+A starter template for building modern webapps that deploy to Dataiku. Uses React + Vite for the frontend and Python (FastAPI/Flask) backend.
 
 **Why this approach?** Dataiku webapps only accept single HTML/CSS/JS files, which becomes painful as your app grows. This starter lets you develop with modern tooling locally, then builds everything into the format Dataiku expects.
 
@@ -74,20 +74,6 @@ make backend-start
 ```
 
 Open `http://localhost:4200` - you're ready to develop!
-
-## Development
-
-### Adding UI Components
-
-This starter includes [shadcn-vue](https://www.shadcn-vue.com/docs/components) for building UIs quickly:
-
-```bash
-pnpm dlx shadcn-vue@latest add button
-pnpm dlx shadcn-vue@latest add table
-pnpm dlx shadcn-vue@latest add dialog
-```
-
-Browse all components at [shadcn-vue.com/docs/components](https://www.shadcn-vue.com/docs/components).
 
 ## Deployment to Dataiku
 
@@ -177,14 +163,13 @@ White page? Hard refresh: `Cmd+Shift+R` (Mac) / `Ctrl+Shift+R` (Windows)
 
 ## Command Reference
 
-| Task             | Command                                 |
-| ---------------- | --------------------------------------- |
-| Install frontend | `pnpm install`                          |
-| Start frontend   | `pnpm dev`                              |
-| Install backend  | `make backend-install`                  |
-| Start backend    | `make backend-start`                    |
-| Build for deploy | `pnpm build`                            |
-| Add UI component | `pnpm dlx shadcn-vue@latest add <name>` |
+| Task             | Command                |
+| ---------------- | ---------------------- |
+| Install frontend | `pnpm install`         |
+| Start frontend   | `pnpm dev`             |
+| Install backend  | `make backend-install` |
+| Start backend    | `make backend-start`   |
+| Build for deploy | `pnpm build`           |
 
 ## Switching to Production Instance
 
@@ -195,6 +180,7 @@ By default, this connects to Design. For Production:
 
 ## Resources
 
-- [shadcn-vue Components](https://www.shadcn-vue.com/docs/components)
-- [Vue.js Docs](https://vuejs.org/)
+- [React.js Docs](https://react.dev/reference/react)
+- [Flask Docs](https://flask.palletsprojects.com/en/stable/)
+- [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Dataiku Webapp Tutorial](https://developer.dataiku.com/latest/tutorials/webapps/code-studio/deployment/index.html)
