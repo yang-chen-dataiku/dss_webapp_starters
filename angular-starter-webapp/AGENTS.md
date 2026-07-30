@@ -12,14 +12,24 @@ Unlike the Vue/React starters which use Vite, this project uses Angular CLI (`@a
 
 ### Development
 
-```bash
-# Frontend (Terminal 1)
-pnpm install
-pnpm dev              # ng serve at http://localhost:4200
+#### Frontend
 
-# Backend (Terminal 2)
-make backend-install
-make backend-start    # Starts at http://localhost:5000
+```bash
+# Frontend (http://localhost:4200)
+pnpm install
+pnpm dev
+```
+
+#### Backend
+
+```bash
+# Flask backend (http://localhost:5000)
+make backend-start
+
+# FastAPI backend (http://localhost:5000)
+# Make sure the BACKEND_TYPE shell variable is exported if you start a new shell session
+export BACKEND_TYPE=fastapi
+make backend-start
 ```
 
 ### Build & Deploy

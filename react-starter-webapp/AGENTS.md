@@ -10,6 +10,16 @@ React + Vite webapp starter that deploys to Dataiku. Builds to single HTML/CSS/J
 
 ### Development
 
+#### Frontend
+
+```bash
+# Frontend (http://localhost:4200)
+pnpm install
+pnpm dev
+```
+
+#### Backend
+
 ```bash
 # Flask backend (http://localhost:5000)
 make backend-start
