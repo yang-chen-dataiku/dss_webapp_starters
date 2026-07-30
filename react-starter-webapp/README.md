@@ -75,6 +75,20 @@ make backend-start
 
 Open `http://localhost:4200` - you're ready to develop!
 
+## Development
+
+### Adding UI Components
+
+This starter includes [shadcn](https://www.shadcn.io/ui) for building UIs quickly:
+
+```bash
+pnpm dlx shadcn@latest add button
+pnpm dlx shadcn@latest add table
+pnpm dlx shadcn@latest add dialog
+```
+
+Browse all components at [shadcn.io/ui](https://www.shadcn.io/ui).
+
 ## Deployment to Dataiku
 
 ### 1. Build

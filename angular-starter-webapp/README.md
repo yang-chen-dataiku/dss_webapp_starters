@@ -1,6 +1,6 @@
 # Angular Webapp Starter for Dataiku
 
-A starter template for building modern webapps that deploy to Dataiku. Uses Angular + Vite for the frontend and Python (FastAPI/Flask) backend.
+A starter template for building modern webapps that deploy to Dataiku. Uses Angular 18 for the frontend and Python (FastAPI/Flask) backend.
 
 **Why this approach?** Dataiku webapps only accept single HTML/CSS/JS files, which becomes painful as your app grows. This starter lets you develop with modern tooling locally, then builds everything into the format Dataiku expects.
 
