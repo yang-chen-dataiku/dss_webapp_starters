@@ -39,7 +39,7 @@ backend-build:
 
 # Sync Flask dependencies for Dataiku Code Studio
 backend-build-cs:
-	uv sync -p 3.10 --extra flask \
+	uv sync $(UV_FLAGS) \
 		--allow-insecure-host design.ds-platform.ondku.net \
 		--allow-insecure-host pypi.org \
 		--allow-insecure-host files.pythonhosted.org
