@@ -18,11 +18,12 @@ endif
 
 UV_FLAGS := -p $(PYTHON_VERSION) --extra $(BACKEND_TYPE)
 
-.PHONY: help backend-build backend-install backend-start backend-clean
+.PHONY: help backend-build backend-build-cs backend-install backend-start backend-clean
 
 help:
 	@echo "Targets:"
 	@echo "  backend-build  - Sync project dependencies with uv (py$(PYTHON_VERSION))"
+	@echo "  backend-build-cs - Sync Flask dependencies for Dataiku Code Studio"
 	@echo "  backend-start  - Start Python backend (loads ./.env)"
 	@echo "  backend-clean  - Remove backend virtualenv"
 	@echo ""
@@ -36,6 +37,13 @@ help:
 backend-build:
 	$(UV) sync $(UV_FLAGS)
 
+# Sync Flask dependencies for Dataiku Code Studio
+backend-build-cs:
+	uv sync -p 3.10 --extra flask \
+		--allow-insecure-host design.ds-platform.ondku.net \
+		--allow-insecure-host pypi.org \
+		--allow-insecure-host files.pythonhosted.org
+
 # Start backend
 backend-start:
 	$(UV) run $(UV_FLAGS) -m backend.$(BACKEND_TYPE).app
@@ -43,4 +51,3 @@ backend-start:
 # Remove the backend virtual environment
 backend-clean:
 	rm -rf $(VENV_DIR)
-

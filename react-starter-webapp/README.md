@@ -181,7 +181,7 @@ White page? Hard refresh: `Cmd+Shift+R` (Mac) / `Ctrl+Shift+R` (Windows)
 | ---------------- | ---------------------- |
 | Install frontend | `pnpm install`         |
 | Start frontend   | `pnpm dev`             |
-| Install backend  | `make backend-install` |
+| Install Flask backend for Code Studio | `make backend-build-cs` |
 | Start backend    | `make backend-start`   |
 | Build for deploy | `pnpm build`           |
 
